@@ -7,7 +7,12 @@ import 'package:stradda_01/utils/drawer_list.dart';
 import 'package:stradda_01/carro/carros_api.dart';
 import 'package:stradda_01/carro/carro.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin<HomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -22,14 +27,12 @@ class HomePage extends StatelessWidget {
           ],),
         ),
         body: TabBarView(children: [
-          CarrosListView(),
-          CarrosListView(),
-          CarrosListView(),
+          CarrosListView(TipoCarro.classicos),
+          CarrosListView(TipoCarro.esportivos),
+          CarrosListView(TipoCarro.luxo),
         ],),
         drawer: DrawerList(),
       ),
     );
   }
-
-
 }
