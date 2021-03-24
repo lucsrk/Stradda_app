@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stradda_01/carro/home_page.dart';
 import 'package:stradda_01/login/login_page.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/utils/nav.dart';
@@ -54,6 +55,7 @@ class DrawerList extends StatelessWidget {
   }
 
   _OnClickLogout(BuildContext context) {
+    Usuario.clear();
     Navigator.pop(context);
     push(context, LoginPage(), replace: true);
   }
