@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/pages/api_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:stradda_01/widgets/prefs.dart';
 
 
 
@@ -32,6 +33,8 @@ class LoginApi {
 
      if (response.statusCode == 200) {
        final user = Usuario.fromJson(mapResponse);
+
+       user.save();
        return ApiResponse.ok(user);
      }
 

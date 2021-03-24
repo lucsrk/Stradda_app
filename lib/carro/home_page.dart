@@ -15,22 +15,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin<HomePage> {
-
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
 
+    _initTabs();
+  }
+
+  _initTabs() async {
+
+    // Primeiro busca o índice nas prefs.
+    int tabIdx = await Prefs.getInt("tabIdx");
+
+    // Depois cria o TabController
+    // No método build na primeira vez ele poderá estar nulo
     _tabController = TabController(length: 3, vsync: this);
 
-    Future<int> future = Prefs.getInt("tabIdx");
-    
-    future.then((int tabIdx){
+    // Agora que temos o TabController e o índice da tab,
+    // chama o setState para redesenhar a tela
+    setState(() {
       _tabController.index = tabIdx;
-
     });
-    _tabController.addListener((){
+
+    _tabController.addListener(() {
       Prefs.setInt("tabIdx", _tabController.index);
     });
   }
@@ -39,8 +48,10 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stradda"),
-        bottom: TabBar(
+        title: Text("Carros"),
+        bottom: _tabController == null
+            ? null
+            : TabBar(
           controller: _tabController,
           tabs: [
             Tab(
@@ -51,11 +62,15 @@ class _HomePageState extends State<HomePage>
             ),
             Tab(
               text: "Luxo",
-            ),
+            )
           ],
         ),
       ),
-      body: TabBarView(
+      body: _tabController == null
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : TabBarView(
         controller: _tabController,
         children: [
           CarrosListView(TipoCarro.classicos),
