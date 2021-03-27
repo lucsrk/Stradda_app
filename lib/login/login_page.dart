@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carro/home_page.dart';
 import 'package:stradda_01/login/login_api.dart';
@@ -17,11 +19,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final _streamController = StreamController<bool>();
+
   final _tlogin = TextEditingController();
 
   final _tsenha = TextEditingController();
 
-  bool _showProgress = false;
 
   @override
   
@@ -71,10 +74,16 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20,
             ),
-            AppButton(
-              "Login",
-              onPressed: _onClickLogin,
-              showProgress: _showProgress,
+            StreamBuilder<bool>(
+              stream: _streamController.stream,
+              initialData: false,
+              builder: (context, snapshot) {
+                return AppButton(
+                  "Login",
+                  onPressed: _onClickLogin,
+                  showProgress: snapshot.data,
+                );
+              }
             ),
           ],
         ),
@@ -91,9 +100,7 @@ class _LoginPageState extends State<LoginPage> {
 
     print("Login: $login, Senha: $senha");
 
-    setState(() {
-      _showProgress = true;
-    });
+    _streamController.add(true);
 
     ApiResponse response = await LoginApi.login(login, senha);
     if (response.ok) {
@@ -104,9 +111,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       alert(context, response.msg);
     }
-    setState(() {
-      _showProgress = false;
-    });
+   _streamController.add(false);
   }
 
 
@@ -125,5 +130,10 @@ class _LoginPageState extends State<LoginPage> {
       return "A senha necessita ter pelos menos 8 dígitos";
     }
     return null;
+  }
+  @override
+  void dispose(){
+    super.dispose();
+    _streamController.close();
   }
 }

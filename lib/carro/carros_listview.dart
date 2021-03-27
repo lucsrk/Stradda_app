@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carro/carro.dart';
+import 'package:stradda_01/carro/carro_page.dart';
 import 'package:stradda_01/carro/carros_api.dart';
+import 'package:stradda_01/utils/nav.dart';
 
 class CarrosListView extends StatefulWidget {
   String tipo;
@@ -11,19 +15,36 @@ class CarrosListView extends StatefulWidget {
 }
 
 class _CarrosListViewState extends State<CarrosListView> with AutomaticKeepAliveClientMixin<CarrosListView> {
+  List<Carro> carros;
+
+  final _streamController = StreamController<List<Carro>>();
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+      _loadData();
+  }
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return _body();
   }
 
+  _loadData() async{
+    List<Carro> carros = await CarrosApi.getCarros(widget.tipo);
+      
+    _streamController.add(carros);
+  }
+
   _body() {
-    Future<List<Carro>> future = CarrosApi.getCarros(widget.tipo);
-    return FutureBuilder(
-      future: future,
+    return StreamBuilder(
+      stream:_streamController.stream ,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -88,9 +109,7 @@ class _CarrosListViewState extends State<CarrosListView> with AutomaticKeepAlive
                               'Detalhes',
                               style: TextStyle(fontSize: 18),
                             ),
-                            onPressed: () {
-                              /* ... */
-                            },
+                            onPressed: () => _OnClickCarro(c),
                           ),
                           TextButton(
                             child: const Text(
@@ -110,5 +129,15 @@ class _CarrosListViewState extends State<CarrosListView> with AutomaticKeepAlive
             );
           }),
     );
+  }
+
+  _OnClickCarro(Carro c) {
+    push (context, CarroPage(c));
+
+  }
+  @override
+  void dispose(){
+    super.dispose();
+    _streamController.close();
   }
 }

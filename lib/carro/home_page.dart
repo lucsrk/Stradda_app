@@ -3,9 +3,6 @@ import 'package:stradda_01/carro/carro.dart';
 import 'package:stradda_01/carro/carros_api.dart';
 import 'package:stradda_01/carro/carros_listview.dart';
 import 'package:stradda_01/utils/drawer_list.dart';
-import 'package:stradda_01/utils/drawer_list.dart';
-import 'package:stradda_01/carro/carros_api.dart';
-import 'package:stradda_01/carro/carro.dart';
 import 'package:stradda_01/widgets/prefs.dart';
 
 class HomePage extends StatefulWidget {
