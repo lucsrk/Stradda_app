@@ -1,8 +1,9 @@
 import 'dart:convert' as convert;
-
+import 'package:stradda_01/login/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carro/carro.dart';
 import 'package:http/http.dart' as http;
+import 'package:stradda_01/login/usuario.dart';
 
 class TipoCarro {
 
@@ -16,12 +17,19 @@ class CarrosApi {
 
   static Future<List<Carro>> getCarros(String tipo) async {
 
-      var url = "https://carros-springboot.herokuapp.com/api/v1/carros/tipo/$tipo";
+    Usuario user = await Usuario.get();
 
-      var response = await http.get(url);
+    Map <String, String> headers = {
+      "Context-Type": "application/json",
+      "Authorization": "Bearer ${user.token}"
+
+    };
+
+      var url = "https://carros-springboot.herokuapp.com/api/v2/carros/tipo/$tipo";
+
+      var response = await http.get(url, headers: headers );
 
       String json = response.body;
-      print(json);
 
       List list = convert.json.decode(json);
 
