@@ -6,6 +6,7 @@ import 'package:stradda_01/carro/carro_page.dart';
 import 'package:stradda_01/carro/carros_api.dart';
 import 'package:stradda_01/carro/carros_bloc.dart';
 import 'package:stradda_01/utils/nav.dart';
+import 'package:stradda_01/widgets/text_error.dart';
 
 class CarrosListView extends StatefulWidget {
   String tipo;
@@ -42,15 +43,8 @@ class _CarrosListViewState extends State<CarrosListView> with AutomaticKeepAlive
       stream:_bloc.stream ,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              "Não possível carregar a lista de carros",
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 22,
-              ),
-            ),
-          );
+          return TextError("Não foi possível carregar os carros :d");
+
         }
 
         if (!snapshot.hasData) {
