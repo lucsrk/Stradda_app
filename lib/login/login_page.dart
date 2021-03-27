@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carro/home_page.dart';
 import 'package:stradda_01/login/login_api.dart';
+import 'package:stradda_01/login/login_bloc.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/pages/api_response.dart';
 import 'package:stradda_01/utils/alert.dart';
 import 'package:stradda_01/utils/nav.dart';
 import 'package:stradda_01/widgets/app_button.dart';
 import 'package:stradda_01/widgets/app_text.dart';
-import 'package:stradda_01/pages/api_response.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _streamController = StreamController<bool>();
+  final _bloc = LoginBloc();
 
   final _tlogin = TextEditingController();
 
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             StreamBuilder<bool>(
-              stream: _streamController.stream,
+              stream: _bloc.buttonstream,
               initialData: false,
               builder: (context, snapshot) {
                 return AppButton(
@@ -100,9 +100,7 @@ class _LoginPageState extends State<LoginPage> {
 
     print("Login: $login, Senha: $senha");
 
-    _streamController.add(true);
-
-    ApiResponse response = await LoginApi.login(login, senha);
+    ApiResponse response = await _bloc.login(login, senha);
     if (response.ok) {
       Usuario user = response.result;
 
@@ -111,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       alert(context, response.msg);
     }
-   _streamController.add(false);
+
   }
 
 
@@ -134,6 +132,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose(){
     super.dispose();
-    _streamController.close();
+    _bloc.dispose();
   }
 }
