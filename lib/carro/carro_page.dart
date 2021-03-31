@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carro/carro.dart';
+import 'package:stradda_01/carro/loripsum_api.dart';
 
-class CarroPage extends StatelessWidget {
+class CarroPage extends StatefulWidget {
 
   Carro carro;
 
@@ -9,10 +10,27 @@ class CarroPage extends StatelessWidget {
   CarroPage(this.carro);
 
   @override
+  _CarroPageState createState() => _CarroPageState();
+}
+
+class _CarroPageState extends State<CarroPage> {
+  final _loripsumApiBloc = LoripsumBloc();
+
+  @override
+  void initState(){
+    super.initState();
+    
+    _loripsumApiBloc.fetch();
+
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text (carro.nome),
+        title: Text (widget.carro.nome),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.place),
@@ -46,7 +64,7 @@ class CarroPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
         child: ListView(
           children: [
-            Image.network(carro.urlFoto),
+            Image.network(widget.carro.urlFoto),
             Divider(),
             _bloco1(),
             _bloco2(),
@@ -61,10 +79,10 @@ class CarroPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget> [
-                  Text(carro.nome,
+                  Text(widget.carro.nome,
                     style:
                     TextStyle(fontSize: 20, fontWeight: FontWeight.bold ),),
-                  Text(carro.tipo, style: TextStyle(fontSize: 16),),
+                  Text(widget.carro.tipo, style: TextStyle(fontSize: 16),),
                 ],
               ),
               Row(
@@ -88,15 +106,18 @@ class CarroPage extends StatelessWidget {
       crossAxisAlignment:  CrossAxisAlignment.start,
       children: [
         SizedBox( height: 15,),
-        Text (carro.descricao, style: TextStyle (fontSize: 16, fontWeight: FontWeight.bold), ),
+        Text (widget.carro.descricao, style: TextStyle (fontSize: 16, fontWeight: FontWeight.bold), ),
         SizedBox( height: 20,),
-        Text ("ttttt", style: TextStyle (fontSize: 16),),
-
-
-
+        StreamBuilder<String>(
+          stream: _loripsumApiBloc.stream,
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            if (!snapshot.hasData) {
+            return Center (child: CircularProgressIndicator(),);
+        }
+           return Text (snapshot.data, style: TextStyle (fontSize: 16));
+        },
+        ),
       ],
-
-
     );
 
 
@@ -128,5 +149,10 @@ class CarroPage extends StatelessWidget {
   }
 
   void _onClickShare() {
+    @override
+    void dispose(){
+      super.dispose();
+    }
   }
+
 }
