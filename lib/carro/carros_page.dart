@@ -11,6 +11,8 @@ import 'package:stradda_01/widgets/text_error.dart';
 
 class CarrosPage extends StatefulWidget {
   String tipo;
+
+
   CarrosPage(this.tipo);
 
   @override
@@ -52,11 +54,16 @@ class _CarrosPageState extends State<CarrosPage> with AutomaticKeepAliveClientMi
           return Center(child: CircularProgressIndicator(),);
         }
         List<Carro> carros = snapshot.data;
-        return CarrosListView(carros);
+        return RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: CarrosListView(carros));
       },
     );
   }
 
+  Future<void> _onRefresh() {
+    return _bloc.loadData(widget.tipo);
+  }
 
 
 
@@ -65,4 +72,5 @@ class _CarrosPageState extends State<CarrosPage> with AutomaticKeepAliveClientMi
     super.dispose();
     _bloc.dispose();
   }
+
 }
