@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stradda_01/carro/carro.dart';
-import 'package:stradda_01/carro/loripsum_api.dart';
+import 'package:stradda_01/carros/carro.dart';
+import 'package:stradda_01/carros/loripsum_api.dart';
 
 class CarroPage extends StatefulWidget {
 

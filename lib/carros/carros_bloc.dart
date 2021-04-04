@@ -1,6 +1,6 @@
-import 'package:stradda_01/carro/carro.dart';
-import 'package:stradda_01/carro/carros_api.dart';
-import 'package:stradda_01/carro/simple.bloc.dart';
+import 'package:stradda_01/carros/carro.dart';
+import 'package:stradda_01/carros/carros_api.dart';
+import 'package:stradda_01/carros/simple.bloc.dart';
 
 class CarrosBloc extends SimpleBloc<List<Carro>>{
 
@@ -9,6 +9,8 @@ class CarrosBloc extends SimpleBloc<List<Carro>>{
     List<Carro> carros = await CarrosApi.getCarros(tipo);
 
     add(carros);
+
+    return carros;
   }catch (e){
     addError(e);
     }

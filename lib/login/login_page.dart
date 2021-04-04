@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stradda_01/carro/home_page.dart';
+import 'package:stradda_01/carros/home_page.dart';
 import 'package:stradda_01/login/login_api.dart';
 import 'package:stradda_01/login/login_bloc.dart';
 import 'package:stradda_01/login/usuario.dart';

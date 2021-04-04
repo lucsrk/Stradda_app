@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stradda_01/carro/home_page.dart';
+import 'package:stradda_01/carros/home_page.dart';
 import 'package:stradda_01/login/login_page.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/utils/nav.dart';

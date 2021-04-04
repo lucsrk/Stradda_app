@@ -1,7 +1,8 @@
 import 'dart:convert' as convert;
+import 'package:stradda_01/favoritos/carros_dao.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:flutter/material.dart';
-import 'package:stradda_01/carro/carro.dart';
+import 'package:stradda_01/carros/carro.dart';
 import 'package:http/http.dart' as http;
 import 'package:stradda_01/login/usuario.dart';
 
@@ -35,8 +36,15 @@ class CarrosApi {
 
       final carros = list.map<Carro>((map)=> Carro.fromJson(map)).toList();
 
+      final dao = CarroDAO();
+
+      // Salvar todos os carros
+
+      carros.forEach(dao.save);
+
 
       return carros;
+
 
 
   }
