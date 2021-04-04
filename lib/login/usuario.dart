@@ -58,10 +58,15 @@ class Usuario {
     Usuario user = Usuario.fromJson(map);
     return user;
   }
+   @override
+   String toString(){
+    return 'Usuario{login: $login, nome: $nome}';
+   }
 
   static void clear() {
 
     Prefs.setString("user.prefs", "");
   }
+
 
 }

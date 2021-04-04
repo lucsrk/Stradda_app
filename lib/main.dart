@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stradda_01/splash_page.dart';
 
 import 'login/login_page.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginPage(
+      home: SplashPage(
 
       ),
     );
