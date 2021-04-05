@@ -8,14 +8,18 @@ class CarrosBloc extends SimpleBloc<List<Carro>>{
 
   Future <List<Carro>> loadData(String tipo) async{
     try{
-
-      bool networkOn = await isNetworkOn();
-      if(!networkOn){
+      if(! await isNetworkOn()){
         List<Carro> carros = await CarroDAO().findAllByTipo(tipo);
         add(carros);
         return carros;
       }
     List<Carro> carros = await CarrosApi.getCarros(tipo);
+
+      if(carros.isNotEmpty) {
+        final dao = CarroDAO();
+        // Salvar todos os carros
+        carros.forEach(dao.save);
+      }
 
     add(carros);
 
