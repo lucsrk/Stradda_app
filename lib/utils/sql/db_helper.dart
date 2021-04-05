@@ -29,10 +29,12 @@ class DatabaseHelper {
     return db;
   }
 
-  void _onCreate(Database db, int newVersion) async {
+  Future <void> _onCreate(Database db, int newVersion) async {
     await db.execute(
         'CREATE TABLE carro(id INTEGER PRIMARY KEY, tipo TEXT, nome TEXT'
             ', descricao TEXT, urlFoto TEXT, urlVideo TEXT, latitude TEXT, longitude TEXT)');
+      await  db.execute(
+    'CREATE TABLE favorito (id INTEGER PRIMARY KEY, nome TEXT)');
   }
 
   Future<FutureOr<void>> _onUpgrade(Database db, int oldVersion, int newVersion) async {

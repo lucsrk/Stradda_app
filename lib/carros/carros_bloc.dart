@@ -1,7 +1,7 @@
 import 'package:stradda_01/carros/carro.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/simple.bloc.dart';
-import 'package:stradda_01/favoritos/carros_dao.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/carros/carros_dao.dart';
 import 'package:stradda_01/utils/network.dart';
 
 class CarrosBloc extends SimpleBloc<List<Carro>>{

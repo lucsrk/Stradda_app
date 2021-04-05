@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:stradda_01/carros/carro.dart';
-import 'package:stradda_01/favoritos/db_helper.dart';
-import 'package:stradda_01/favoritos/entity.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/utils/sql/db_helper.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/utils/sql/entity.dart';
 
 // Data Access Object
 abstract class BaseDAO <T extends Entity> {

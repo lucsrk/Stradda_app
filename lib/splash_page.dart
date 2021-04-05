@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/home_page.dart';
-import 'package:stradda_01/favoritos/db_helper.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/utils/sql/db_helper.dart';
 import 'package:stradda_01/login/login_page.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/utils/nav.dart';

@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:stradda_01/favoritos/carros_dao.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/carros/carros_dao.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';

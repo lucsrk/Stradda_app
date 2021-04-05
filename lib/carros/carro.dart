@@ -1,5 +1,5 @@
 
-import 'package:stradda_01/favoritos/entity.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/utils/sql/entity.dart';
 
 class Carro  extends Entity{
   int id;
