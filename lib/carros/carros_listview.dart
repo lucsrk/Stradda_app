@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';
 import 'package:stradda_01/carros/carro_page.dart';
@@ -31,7 +32,8 @@ class CarrosListView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Center(
-                      child: Image.network(
+                      child: CachedNetworkImage(
+                        imageUrl:
                         c.urlFoto != null
                             ? c.urlFoto
                             : "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Pagani_Zonda.png",
