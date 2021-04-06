@@ -1,4 +1,5 @@
 import 'package:stradda_01/carros/carro.dart';
+import 'package:stradda_01/carros/carros_dao.dart';
 import 'package:stradda_01/favoritos/favorito.dart';
 import 'package:stradda_01/favoritos/favorito_dao.dart';
 
@@ -6,7 +7,6 @@ class FavoritoService{
   static favoritar(Carro c) async{
 
     Favorito f = Favorito.fromCarro(c);
-
 
     final dao = FavoritoDAO();
 
@@ -19,9 +19,12 @@ class FavoritoService{
       //Adiciona aos Favoritos
       dao.save(f);
     }
+  }
+  static Future<List<Carro>> getCarros() async{
+    // select * from carro c.favorito f wherec.id = f.id
+    List<Carro> carros = await CarroDAO().query("select * from carro c, favorito f where c.id = f.id");
 
-
-
+    return carros;
 
   }
 }

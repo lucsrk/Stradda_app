@@ -3,6 +3,7 @@ import 'package:stradda_01/carros/carro.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/carros_listview.dart';
 import 'package:stradda_01/carros/carros_page.dart';
+import 'package:stradda_01/favoritos/favoritos_page.dart';
 import 'package:stradda_01/utils/drawer_list.dart';
 import 'package:stradda_01/widgets/prefs.dart';
 
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage>
           tabs: [
             Tab(
               text: "Clássicos",
+              //lembrar de alterar icone
               icon: Icon(Icons.directions_car),
             ),
             Tab(
@@ -81,7 +83,7 @@ class _HomePageState extends State<HomePage>
           CarrosPage(TipoCarro.classicos),
           CarrosPage(TipoCarro.esportivos),
           CarrosPage(TipoCarro.luxo),
-          Container(),
+          FavoritosPage(),
         ],
       ),
       drawer: DrawerList(),
