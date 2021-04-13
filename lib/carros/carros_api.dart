@@ -44,40 +44,56 @@ class CarrosApi {
     return carros;
   }
 
-  static Future <ApiResponse<bool>> save (Carro c) async {
-    Usuario user = await Usuario.get();
+  static Future <ApiResponse<bool>> save(Carro c) async {
+    try {
+      Usuario user = await Usuario.get();
 
-    Map <String, String> headers = {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer ${user.token}"
-    };
+      Map <String, String> headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${user.token}"
+      };
 
-    var url = "https://carros-springboot.herokuapp.com/api/v2/carros";
+      var url = "https://carros-springboot.herokuapp.com/api/v2/carros";
 
-    print("Post > $url");
+      if (c.id != null){
+        url += "/${c.id}";
 
-    String json = c.toJson();
+      }
 
-    var response =  await http.post(url, body: json, headers: headers);
+      print("Post > $url");
 
-    print("Response status: ${response.statusCode}");
-    print ("Response body: ${response.body}");
+      String json = c.toJson();
 
-    if (response.statusCode == 201){
+      var response = await (
+      c.id == null ?
+      http.post(url, body: json, headers: headers):
+      http.put(url, body: json, headers: headers)
+      );
+
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Map mapResponse = convert.json.decode(response.body);
+
+        Carro carro = Carro.fromMap(mapResponse);
+
+        print("Novo Carro: ${carro.id}");
+
+        return ApiResponse.ok(true);
+      }
+
+      if (response.body == null || response.body.isEmpty) {
+        return ApiResponse.error("Não foi possível salvar o carro");
+      }
+
       Map mapResponse = convert.json.decode(response.body);
-
-      Carro carro = Carro.fromMap(mapResponse);
-
-      print ("Novo Carro: ${carro.id}");
-
-      return ApiResponse.ok(true);
+      return ApiResponse.error(mapResponse["error"]);
+    } catch (e) {
+      print(e);
+      return ApiResponse.error("Não foi possível salvar o carro");
     }
-
-    Map mapResponse = convert.json.decode(response.body);
-    return ApiResponse.error(mapResponse["error"]);
-
-    }
-
   }
 
 
+}
