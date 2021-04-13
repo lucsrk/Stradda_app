@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';
+import 'package:stradda_01/carros/carro_form_page.dart';
 import 'package:stradda_01/carros/loripsum_api.dart';
 import 'package:stradda_01/favoritos/favorito_service.dart';
+import 'package:stradda_01/utils/nav.dart';
 
 class CarroPage extends StatefulWidget {
 
@@ -18,11 +20,21 @@ class CarroPage extends StatefulWidget {
 class _CarroPageState extends State<CarroPage> {
   final _loripsumApiBloc = LoripsumBloc();
 
+  Color color = Colors.grey;
+
   Carro get carro => widget.carro;
 
   @override
   void initState(){
     super.initState();
+
+    FavoritoService.isFavorito(carro).then ((bool favorito){
+      setState(() {
+        color = favorito ? Colors.red : Colors.grey;
+      });
+    });
+
+
     
     _loripsumApiBloc.fetch();
 
@@ -93,7 +105,9 @@ class _CarroPageState extends State<CarroPage> {
               Row(
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.favorite, size: 40,),
+                    icon: Icon(Icons.favorite,
+                      color: color,
+                      size: 40,),
                     onPressed: _onClickFavorito,
                   ),
                   IconButton(
@@ -140,7 +154,7 @@ class _CarroPageState extends State<CarroPage> {
         print ("Compartilhar !!!");
         break;
       case "Editar":
-        print ("Editar !!!");
+        push(context, CarroFormPage(carro: carro));
         break;
       case "Deletar":
         print ("Deletar !!!");
@@ -150,8 +164,13 @@ class _CarroPageState extends State<CarroPage> {
 
   }
 
-  void _onClickFavorito() {
-    FavoritoService.favoritar(carro);
+  void _onClickFavorito() async {
+    bool favorito = await FavoritoService.favoritar(carro);
+
+    setState(() {
+      color = favorito ? Colors.red : Colors.grey;
+
+    });
   }
 
   void _onClickShare() {

@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-  alert (BuildContext context, String msg){
+  alert (BuildContext context, String msg, {Function callback}){
 
   showDialog(
     context: context,
@@ -19,6 +19,9 @@ import 'package:flutter/material.dart';
                   child: Text("Ok"),
                   onPressed: (){
                     Navigator.pop(context);
+                    if (callback != null){
+                      callback();
+                    }
 
                   },
               ),

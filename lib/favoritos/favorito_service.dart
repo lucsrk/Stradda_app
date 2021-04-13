@@ -4,7 +4,7 @@ import 'package:stradda_01/favoritos/favorito.dart';
 import 'package:stradda_01/favoritos/favorito_dao.dart';
 
 class FavoritoService{
-  static favoritar(Carro c) async{
+  static  Future <bool> favoritar(Carro c) async{
 
     Favorito f = Favorito.fromCarro(c);
 
@@ -15,9 +15,14 @@ class FavoritoService{
     if (exists){
       // Remove dos Favoritos
       dao.delete(c.id);
+
+      return false;
+
     }else {
       //Adiciona aos Favoritos
       dao.save(f);
+
+      return true;
     }
   }
   static Future<List<Carro>> getCarros() async{
@@ -27,4 +32,12 @@ class FavoritoService{
     return carros;
 
   }
-}
+
+  static Future<bool> isFavorito(Carro c) async {
+    final dao = FavoritoDAO();
+
+    bool exists = await dao.exists(c.id);
+
+    return exists;
+    }
+  }
