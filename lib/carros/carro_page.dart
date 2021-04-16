@@ -2,8 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';
 import 'package:stradda_01/carros/carro_form_page.dart';
+import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/loripsum_api.dart';
 import 'package:stradda_01/favoritos/favorito_service.dart';
+import 'package:stradda_01/pages/api_response.dart';
+import 'package:stradda_01/utils/alert.dart';
 import 'package:stradda_01/utils/nav.dart';
 
 class CarroPage extends StatefulWidget {
@@ -81,9 +84,10 @@ class _CarroPageState extends State<CarroPage> {
         child: ListView(
           children: [
         CachedNetworkImage(
-        imageUrl: widget.carro.urlFoto),
-            Divider(),
+        imageUrl: widget.carro.urlFoto ??
+            "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Pagani_Zonda.png"),
             _bloco1(),
+            Divider(),
             _bloco2(),
           ],
         ));
@@ -157,7 +161,7 @@ class _CarroPageState extends State<CarroPage> {
         push(context, CarroFormPage(carro: carro));
         break;
       case "Deletar":
-        print ("Deletar !!!");
+        deletar();
         break;
 
     }
@@ -171,6 +175,16 @@ class _CarroPageState extends State<CarroPage> {
       color = favorito ? Colors.red : Colors.grey;
 
     });
+  }
+  void deletar() async {
+    ApiResponse<bool> response = await CarrosApi.delete(carro);
+    if (response.ok){
+      alert (context, "Carro deletado com sucesso", callback: (){
+        Navigator.pop(context);
+      });
+    } else {
+      alert(context, response.msg);
+    }
   }
 
   void _onClickShare() {

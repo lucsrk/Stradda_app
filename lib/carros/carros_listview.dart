@@ -34,9 +34,8 @@ class CarrosListView extends StatelessWidget {
                     Center(
                       child: CachedNetworkImage(
                         imageUrl:
-                        c.urlFoto != null
-                            ? c.urlFoto
-                            : "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Pagani_Zonda.png",
+                         c.urlFoto
+                            ?? "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Pagani_Zonda.png",
                         width: 250,
                       ),
                     ),
