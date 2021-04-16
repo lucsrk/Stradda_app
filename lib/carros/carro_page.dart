@@ -7,6 +7,7 @@ import 'package:stradda_01/carros/loripsum_api.dart';
 import 'package:stradda_01/favoritos/favorito_service.dart';
 import 'package:stradda_01/pages/api_response.dart';
 import 'package:stradda_01/utils/alert.dart';
+import 'package:stradda_01/utils/event_bus.dart';
 import 'package:stradda_01/utils/nav.dart';
 
 class CarroPage extends StatefulWidget {
@@ -179,6 +180,7 @@ class _CarroPageState extends State<CarroPage> {
     ApiResponse<bool> response = await CarrosApi.delete(carro);
     if (response.ok){
       alert (context, "Carro deletado com sucesso", callback: (){
+        EventBus.get(context).sendEvent(CarroEvent("carro_deletado", carro.tipo));
         Navigator.pop(context);
       });
     } else {

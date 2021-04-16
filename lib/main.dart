@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stradda_01/favoritos/favoritos_model.dart';
 
 import 'package:stradda_01/splash_page.dart';
+import 'package:stradda_01/utils/event_bus.dart';
 
 import 'login/login_page.dart';
 
@@ -17,6 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<EventBus>(
+            create: (context) => EventBus(),
+            dispose: (context, bus) => bus.dipose(),
+        ),
         ChangeNotifierProvider <FavoritosModel>(
           create : (context) => FavoritosModel(),
         )

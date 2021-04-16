@@ -8,6 +8,7 @@ import 'package:stradda_01/carros/carro.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/pages/api_response.dart';
 import 'package:stradda_01/utils/alert.dart';
+import 'package:stradda_01/utils/event_bus.dart';
 import 'package:stradda_01/utils/nav.dart';
 import 'package:stradda_01/widgets/app_button.dart';
 
@@ -241,6 +242,7 @@ class _CarroFormPageState extends State<CarroFormPage> {
     ApiResponse<bool> response = await CarrosApi.save(c, _file);
     if (response.ok){
       alert (context, "Carro salvo com sucesso", callback: (){
+        EventBus.get(context).sendEvent(CarroEvent("carro_salvo", c.tipo));
         Navigator.pop(context);
       });
     } else {
