@@ -38,6 +38,8 @@ dependencies:
 
   provider: ^4.3.3
 
+  share: ^0.6.5+4
+
 
 
 
