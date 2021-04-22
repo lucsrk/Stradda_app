@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/home_page.dart';
 import 'package:stradda_01/login/login_page.dart';
 import 'package:stradda_01/login/usuario.dart';
+import 'package:stradda_01/perfil/views/perfil_list.dart';
 import 'package:stradda_01/utils/nav.dart';
 
 class DrawerList extends StatelessWidget {
@@ -33,14 +34,12 @@ class DrawerList extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.help),
-              title: Text("Ajuda"),
-              subtitle: Text("mais informações..."),
+              leading: Icon(Icons.person_search),
+              title: Text("Perfil"),
+              subtitle: Text("Trocar de perfil"),
               trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                print("Item 1");
-                Navigator.pop(context);
-              },
+              onTap: () => _OnClickPerfil(context)
+
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
@@ -67,5 +66,10 @@ class DrawerList extends StatelessWidget {
         backgroundImage: NetworkImage(user.urlFoto),
       ),
     );
+  }
+
+  _OnClickPerfil(BuildContext context) {
+    Navigator.pop(context);
+    push(context, PerfilList());
   }
 }
