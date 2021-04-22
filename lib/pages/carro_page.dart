@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';
-import 'package:stradda_01/carros/carro_form_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/carro_form_page.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/loripsum_api.dart';
 import 'package:stradda_01/favoritos/favorito_service.dart';
 import 'package:stradda_01/pages/api_response.dart';
+import 'package:stradda_01/pages/video_page.dart';
 import 'package:stradda_01/utils/alert.dart';
 import 'package:stradda_01/utils/event_bus.dart';
 import 'package:stradda_01/utils/nav.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CarroPage extends StatefulWidget {
 
@@ -58,9 +60,11 @@ class _CarroPageState extends State<CarroPage> {
           ),
           IconButton(
           icon: Icon(Icons.videocam),
-          onPressed: _onClickVideo,
-          ),
-          PopupMenuButton<String>(
+          onPressed: (){
+              _onClickVideo(context);
+            }
+            ),
+            PopupMenuButton<String>(
             onSelected: _onClickPopupMenu,
             itemBuilder: (BuildContext context){
             return[
@@ -150,7 +154,16 @@ class _CarroPageState extends State<CarroPage> {
   void _onClickMapa() {
   }
 
-  void _onClickVideo() {
+  void _onClickVideo(context) {
+
+    if (carro.urlVideo != null && carro.urlVideo.isNotEmpty){
+      //launch (carro.urlVideo);
+      push (context, VideoPage(carro));
+    }else{
+      alert(context,
+          "Desculpe, este carro não possui nenhum vídeo no momento",
+      );
+    }
   }
 
   _onClickPopupMenu(String value) {

@@ -1,7 +1,8 @@
 import 'dart:async';
 
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:stradda_01/carros/home_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/home_page.dart';
 import 'package:stradda_01/login/login_api.dart';
 import 'package:stradda_01/login/login_bloc.dart';
 import 'package:stradda_01/login/usuario.dart';
@@ -79,10 +80,20 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
             ),
+            Container (
+              height: 46,
+              margin: EdgeInsets.only(top: 28),
+              child: GoogleAuthButton(
+                onPressed: _onClickGoogle,
+              ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  void _onClickGoogle() {
   }
 
   void _onClickLogin() async {
@@ -128,4 +139,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
     _bloc.dispose();
   }
+
+
 }

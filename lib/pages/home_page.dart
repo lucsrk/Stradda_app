@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stradda_01/carros/carro.dart';
-import 'package:stradda_01/carros/carro_form_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/carro_form_page.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/carros_listview.dart';
-import 'package:stradda_01/carros/carros_page.dart';
-import 'package:stradda_01/favoritos/favoritos_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/carros_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/favoritos_page.dart';
 import 'package:stradda_01/utils/alert.dart';
 import 'package:stradda_01/utils/drawer_list.dart';
 import 'package:stradda_01/utils/nav.dart';

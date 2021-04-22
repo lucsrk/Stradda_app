@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stradda_01/carros/carro.dart';
-import 'package:stradda_01/carros/carro_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/carro_page.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/carros_bloc.dart';
 import 'package:stradda_01/carros/carros_listview.dart';

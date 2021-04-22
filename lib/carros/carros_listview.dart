@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:stradda_01/carros/carro.dart';
-import 'package:stradda_01/carros/carro_page.dart';
+import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/carro_page.dart';
 import 'package:stradda_01/carros/carros_api.dart';
 import 'package:stradda_01/carros/carros_bloc.dart';
 import 'package:stradda_01/utils/nav.dart';
