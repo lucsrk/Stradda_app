@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stradda_01/firebase/firebase_services.dart';
 import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/home_page.dart';
 import 'package:stradda_01/login/login_page.dart';
 import 'package:stradda_01/login/usuario.dart';
@@ -10,15 +12,15 @@ class DrawerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   Future <Usuario> future = Usuario.get();
+   Future <FirebaseUser> future = FirebaseAuth.instance.currentUser();
 
     return SafeArea(
       child: Drawer(
         child: ListView(
           children: <Widget>[
-           FutureBuilder<Usuario>(
+           FutureBuilder<FirebaseUser>(
              future: future, builder: (context, snapshot){
-               Usuario user = snapshot.data;
+             FirebaseUser user = snapshot.data;
 
                return user !=null ? _header(user) : Container();
            },
@@ -55,16 +57,18 @@ class DrawerList extends StatelessWidget {
 
   _OnClickLogout(BuildContext context) {
     Usuario.clear();
+    FirebaseService().logout();
     Navigator.pop(context);
     push(context, LoginPage(), replace: true);
   }
-  UserAccountsDrawerHeader _header(Usuario user) {
+  UserAccountsDrawerHeader _header(FirebaseUser user) {
     return UserAccountsDrawerHeader(
-      accountName: Text(user.nome),
+      accountName: Text(user.displayName ?? ""),
       accountEmail: Text(user.email),
-      currentAccountPicture: CircleAvatar(
-        backgroundImage: NetworkImage(user.urlFoto),
-      ),
+      currentAccountPicture: user.photoUrl != null ? CircleAvatar(
+        backgroundImage: NetworkImage(user.photoUrl),
+      )
+      : FlutterLogo(),
     );
   }
 

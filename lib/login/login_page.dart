@@ -2,11 +2,14 @@ import 'dart:async';
 
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:stradda_01/firebase/firebase_services.dart';
 import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/home_page.dart';
 import 'package:stradda_01/login/login_api.dart';
 import 'package:stradda_01/login/login_bloc.dart';
 import 'package:stradda_01/login/usuario.dart';
 import 'package:stradda_01/pages/api_response.dart';
+import 'package:stradda_01/pages/cadastro_page.dart';
 import 'package:stradda_01/utils/alert.dart';
 import 'package:stradda_01/utils/nav.dart';
 import 'package:stradda_01/widgets/app_button.dart';
@@ -36,7 +39,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stradda"),
+        title: Text("Stradda",style: TextStyle(fontSize: 22),
+        ),
+        centerTitle: true,
+
       ),
       body: _body(),
     );
@@ -47,6 +53,12 @@ class _LoginPageState extends State<LoginPage> {
       key: _formKey,
       child: Container(
         padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/loginpg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: ListView(
           children: <Widget>[
             AppText(
@@ -55,6 +67,8 @@ class _LoginPageState extends State<LoginPage> {
               controller: _tlogin,
               validator: _validateLogin,
               keyboardType: TextInputType.emailAddress,
+
+
             ),
             SizedBox(
               height: 10,
@@ -80,20 +94,52 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
             ),
+
             Container (
               height: 46,
               margin: EdgeInsets.only(top: 28),
-              child: GoogleAuthButton(
+              child: GoogleSignInButton(
                 onPressed: _onClickGoogle,
               ),
-            )
+            ),
+            Container(
+              height: 46,
+              margin: EdgeInsets.only(top: 20),
+              child: InkWell(
+                onTap: OnClickCadastrar,
+                child: RaisedButton(
+                  color: Colors.black87,
+                  child: Text(
+                  "Cadastre-se",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+  void OnClickCadastrar() {
+    push(context, CadastroPage(), replace: true);
+  }
 
-  void _onClickGoogle() {
+  void _onClickGoogle() async {
+    final service = FirebaseService();
+    ApiResponse response = await service.loginGoogle();
+
+
+    if (response.ok){
+      push (context, HomePage(), replace: true);
+    }else{
+      alert(context, response.msg);
+    }
   }
 
   void _onClickLogin() async {
@@ -107,9 +153,6 @@ class _LoginPageState extends State<LoginPage> {
 
     ApiResponse response = await _bloc.login(login, senha);
     if (response.ok) {
-      Usuario user = response.result;
-
-      print(">>> $user");
       push(context, HomePage(), replace: true);
     } else {
       alert(context, response.msg);
@@ -130,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
       return "Digite a senha";
     }
     if (text.length < 3) {
-      return "A senha necessita ter pelos menos 8 dígitos";
+      return "A senha necessita ter pelos menos 6 dígitos";
     }
     return null;
   }
@@ -139,6 +182,8 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
     _bloc.dispose();
   }
+
+
 
 
 }

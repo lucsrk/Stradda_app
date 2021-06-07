@@ -28,6 +28,7 @@ class AppText extends StatelessWidget {
       textInputAction: TextInputAction.next,
       style: TextStyle(
         fontSize: 20,
+        color: Colors.black87,
       ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -36,6 +37,7 @@ class AppText extends StatelessWidget {
         labelText: label,
         labelStyle: TextStyle(
           fontSize: 20,
+          color: Colors.black,
         ),
         hintText: hint,
       ),

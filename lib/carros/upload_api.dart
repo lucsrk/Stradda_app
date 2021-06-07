@@ -9,7 +9,7 @@ import 'package:stradda_01/pages/api_response.dart';
 class UploadApi {
   static Future<ApiResponse<String>> upload(File file) async {
     try {
-      String url = "https://carros-springboot.herokuapp.com/api/v2/upload";
+      String url = "https://carros-springboot.herokuapp.com/api/v1/upload";
 
       List<int> imageBytes = file.readAsBytesSync();
       String base64Image = convert.base64Encode(imageBytes);

@@ -10,7 +10,7 @@ import 'package:stradda_01/widgets/prefs.dart';
 class LoginApi {
   static Future<ApiResponse<Usuario>> login(String login, String senha) async{
    try{
-     var url = 'https://carros-springboot.herokuapp.com/api/v2/login';
+     var url = 'https://carros-springboot.herokuapp.com/api/v1/login';
 
      Map <String, String> headers = {
        "Context-Type": "application/json"

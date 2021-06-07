@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/pages/home_page.dart';
 import 'file:///C:/Users/Lucas/AndroidStudioProjects/stradda_01/lib/utils/sql/db_helper.dart';
@@ -22,10 +23,10 @@ class _SplashPageState extends State<SplashPage> {
     Future futureB = Future.delayed(Duration(seconds:3));
 
     //Usuario
-    Future<Usuario> futureC = Usuario.get();
+    Future<FirebaseUser> futureC = FirebaseAuth.instance.currentUser();
 
     Future.wait([futureA, futureB, futureC]).then((List values) {
-      Usuario user = values[2];
+      FirebaseUser user = values[2];
       print (user);
       if (user != null) {
         push(context, HomePage(), replace: true);

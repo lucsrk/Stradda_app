@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "122629623722",
+    "project_id": "stradda-cbee2",
+    "storage_bucket": "stradda-cbee2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122629623722:android:ea29e2745e8face76b65d3",
+        "android_client_info": {
+          "package_name": "com.example.stradda_01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122629623722-0to21mhv6630avr3ob4e5ph6064hn01m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stradda_01",
+            "certificate_hash": "d84426ac0488bcc62520b869e994728ac989b4c3"
+          }
+        },
+        {
+          "client_id": "122629623722-ujra20tph2ah8cfbfa6poa6vcjtrcg1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjD0YhFYmwjSytaTfwzT-A393xsL0vYvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122629623722-ujra20tph2ah8cfbfa6poa6vcjtrcg1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
