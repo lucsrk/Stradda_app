@@ -88,7 +88,16 @@ flutter:
     - assets/images/camera.png
     - assets/images/loginp.png
     - assets/images/loginpg.png
-    - assets/images/loginpgg.png
+    - assets/images/carro1.jpg
+    - assets/images/carro2.jpg
+    - assets/images/carro3.jpg
+    - assets/images/carro4.jpg
+    - assets/images/carro5.jpeg
+    - assets/images/carro6.jpg
+    - assets/images/carro7.jpg
+    - assets/images/carro9.jpg
+    - assets/images/carro10.png
+    - assets/images/carro11.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
