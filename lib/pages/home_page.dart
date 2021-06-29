@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage>
     // No método build na primeira vez ele poderá estar nulo
     _tabController = TabController(length: 4, vsync: this);
 
-    // Agora que temos o TabController e o índice da tab,
+
     // chama o setState para redesenhar a tela
     setState(() {
       _tabController.index = tabIdx;
@@ -58,7 +58,6 @@ class _HomePageState extends State<HomePage>
           tabs: [
             Tab(
               text: "Clássicos",
-              //lembrar de alterar icone
               icon: Icon(Icons.directions_car),
             ),
             Tab(

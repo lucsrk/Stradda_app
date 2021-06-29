@@ -30,11 +30,19 @@ class _CadastroPageState extends State<CadastroPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Cadastro"),
+        title: Text("Cadastro", style: TextStyle(fontSize: 22),),
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/carro11.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+      child: Padding(
         padding: EdgeInsets.all(16),
         child: _body(context),
+      ),
       ),
     );
   }
@@ -50,7 +58,7 @@ class _CadastroPageState extends State<CadastroPage> {
             validator: _validateNome,
             keyboardType: TextInputType.text,
             style: TextStyle(
-              color: Colors.blue,
+              color: Colors.black,
               fontSize: 22,
             ),
             decoration: InputDecoration(
@@ -71,7 +79,7 @@ class _CadastroPageState extends State<CadastroPage> {
             validator: _validateLogin,
             keyboardType: TextInputType.text,
             style: TextStyle(
-              color: Colors.blue,
+              color: Colors.black,
               fontSize: 22,
             ),
             decoration: InputDecoration(
@@ -93,7 +101,7 @@ class _CadastroPageState extends State<CadastroPage> {
             obscureText: true,
             keyboardType: TextInputType.number,
             style: TextStyle(
-              color: Colors.blue,
+              color: Colors.black,
               fontSize: 22,
             ),
             decoration: InputDecoration(
@@ -138,7 +146,7 @@ class _CadastroPageState extends State<CadastroPage> {
               child: Text(
                 "Cancelar",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.red,
                   fontSize: 22,
                 ),
               ),

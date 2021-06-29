@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stradda_01/favoritos/favoritos_model.dart';
 import 'package:stradda_01/perfil/provider/perfis.dart';
 import 'package:stradda_01/perfil/routes/routes.dart';
 import 'package:stradda_01/perfil/user_perfil.dart';
@@ -29,9 +28,6 @@ class MyApp extends StatelessWidget {
             create: (context) => EventBus(),
             dispose: (context, bus) => bus.dipose(),
         ),
-        ChangeNotifierProvider <FavoritosModel>(
-          create : (context) => FavoritosModel(),
-        )
       ],
 
       child: MaterialApp(
